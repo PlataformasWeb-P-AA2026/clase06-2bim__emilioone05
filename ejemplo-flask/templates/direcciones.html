@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Direcciones</title>
+</head>
+<body>
+    <h1>Direcciones ({{ numero }})</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div style="color: green;">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <a href="{{ url_for('crear_direccion') }}">+ Crear nueva dirección</a>
+
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Descripción</th>
+            <th>Tipo</th>
+        </tr>
+        {% for d in datos %}
+        <tr>
+            <td>{{ d.descripcion }}</td>
+            <td>{{ d.tipo }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

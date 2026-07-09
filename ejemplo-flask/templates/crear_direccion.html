@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Dirección</title>
+</head>
+<body>
+    <h1>Crear Dirección</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div style="color: red;">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <label for="descripcion">Descripción:</label><br>
+        <input type="text" name="descripcion" id="descripcion" required><br><br>
+
+        <label for="tipo">Tipo:</label><br>
+        <input type="text" name="tipo" id="tipo" required><br><br>
+
+        <label for="estudiante">Estudiante:</label><br>
+        <select name="estudiante" id="estudiante" required>
+            {% for e in estudiantes %}
+                <option value="{{ e.url }}">{{ e.nombre }} {{ e.apellido }}</option>
+            {% endfor %}
+        </select><br><br>   
+
+        <button type="submit">Guardar</button>
+    </form>
+
+    <a href="{{ url_for('las_direcciones') }}">Volver al listado</a>
+</body>
+</html>
